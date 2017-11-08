@@ -4,11 +4,40 @@ import os,os.path
 import shutil
 import string
 
-BOUNDARY = u"==========\n"
-
+BOUNDARY = u"==========\n" #分隔符
 intab = "\/:*?\"<>|"
-outtab = "  ： ？“《》 "
+outtab = "  ： ？“《》 "     #用于替换特殊字符
 #trantab = maketrans(intab, outtab)
+
+HTML_HEAD ='''<!DOCTYPE html>
+<html><meta charset="UTF-8">
+<link rel="stylesheet" href="../style/semantic.css">
+<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+<script src="../style/semantic.js"></script>
+<head>
+    <title>kindle note</title>
+</head>
+'''
+
+CYANG_KINDLE = '''
+<div class="ui cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">kindle note @cyang</div>
+      <div class="description">这是一个使用 python 写的 kindle 笔记导出工具。</div>
+    </div>
+    <div class="ui bottom attached button"><i class="add icon"></i> View GitHub </div>
+  </div>
+</div>
+'''
+
+BOOK_NAME = '''
+<div class="ui segment">
+    <h3 class="ui center aligned header">BookName</h3>
+</div>
+'''
+
+
 
 #分割函数实现利用关键词进行简单的分割成列表，结果为每一条标注
 f = open("source.txt", "r", encoding='utf-8')
@@ -74,16 +103,22 @@ os.mkdir('books') #创建一个books目录，用于存放书名
 # print(os.listdir())
 os.chdir('books') #更改工作目录
 for j in range(0,nameOfBooks.__len__()):
+    '''
+    # 文件名中含有特殊字符则不成创建成功，包括\/*?<>|字符
     #if (nameOfBooks[j]!='Who Moved My Cheese? (Spencer Johnson)'):
-        if (nameOfBooks[j]!='Send to Kindle | 当读书失去动力，你该如何重燃阅读的激情？ (kindle@eub-inc.com)'):
-            f=open(nameOfBooks[j]+".html",'w',encoding='utf-8')
-            f.write('<!DOCTYPE html>'
-                    '<html>'
-                    '<meta charset="UTF-8">\n')
-            f.write(u"cyang kindleNote\n")
-            s=nameOfBooks[j]
-            f.write("<h1>"+s+"</h1>")
-            f.close()
+        #if (nameOfBooks[j]!='Send to Kindle | 当读书失去动力，你该如何重燃阅读的激情？ (kindle@eub-inc.com)'):
+    '''
+    f=open(nameOfBooks[j]+".html",'w',encoding='utf-8')
+    #f.write('<!DOCTYPE html>'
+    #        '<html>'
+    #        '<meta charset="UTF-8">\n')
+    f.write(HTML_HEAD)
+    #f.write(u"cyang kindleNote\n\n")
+    #f.write(CYANG_KINDLE+'\n')
+    s=nameOfBooks[j]
+    #f.write("<h1>"+s+"</h1>"+'\n') #写入书名
+    f.write(BOOK_NAME.replace('BookName',s))
+    f.close()
 
 # 向文件添加标注内容
 print("html name:",os.listdir())
@@ -98,10 +133,17 @@ for j in range(0,sentence.__len__()):
         f=open(changechar(temp[0])+".html",'a',encoding='utf-8') #打开对应的文件
         f.write(u'\n')
         if (s3 != '\n'):
-            f.write("<h2>"+s3+"</h2>")  # 写入新的标注数据
-            f.write("<h3>"+s1+"</h3>")
-            f.write("<h3>"+s2+"</h3>")
-            f.write(u'========+++++++++++++++++++++========\n')
+            #f.write("<h2>"+s3+"</h2>")  # 写入新的标注数据
+            #f.write("<h3>"+s1+"</h3>\n")
+            #f.write("<h3>"+s2+"</h3>\n")
+            f.write("<div class=\"ui raised segment\">\n")
+            f.write("   <h1>"+s3+"   </h1>\n")
+            f.write('''<div class="ui horizontal divider"></div>''') #写入分割条
+            f.write("<a class=\"ui tag label\">"+s2+"</a>")
+            f.write("<a class=\"ui tag label\">"+s1+"</a>")
+            f.write("</div>\n")
+            #f.write(u'========+++++++++++++++++++++========\n')
+            #f.write('''<div class="ui horizontal divider"> or </div>''') #写入分割条
         #print(s3)
         # try:
         #     f.write("<h3>"+s3+"</h3>") #写入新的标注数据
