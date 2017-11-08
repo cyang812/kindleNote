@@ -17,6 +17,7 @@ HTML_HEAD ='''<!DOCTYPE html>
 <head>
     <title>kindle note</title>
 </head>
+<body>
 '''
 
 CYANG_KINDLE = '''
@@ -33,11 +34,38 @@ CYANG_KINDLE = '''
 
 BOOK_NAME = '''
 <div class="ui segment">
-    <h3 class="ui center aligned header">BookName</h3>
+    <h1><h1/>
+    <h1 class="ui center teal aligned header">BookName</h1>
+    <h1><h1/>
 </div>
 '''
 
-
+FOOTER_CONTENT = '''
+<footer>
+  <div class="ui list">
+  <div class="item">
+    <i class="users icon"></i>
+    <div class="content">cyang</div>
+  </div>
+  <div class="item">
+    <i class="marker icon"></i>
+    <div class="content">kindle note</div>
+  </div>
+  <div class="item">
+    <i class="mail icon"></i>
+    <div class="content">
+      <a href="mailto:cy950812@gmail.com">cy950812@gmail.com</a>
+    </div>
+  </div>
+  <div class="item">
+    <i class="linkify icon"></i>
+    <div class="content">
+      <a href="http://cyang.tech">cyang.tech</a>
+    </div>
+  </div>
+</div>
+</footer>
+'''
 
 #分割函数实现利用关键词进行简单的分割成列表，结果为每一条标注
 f = open("source.txt", "r", encoding='utf-8')
@@ -154,3 +182,14 @@ for j in range(0,sentence.__len__()):
         f.close()
     else:
         print("error:",temp[0]+".html")
+
+#向文件添加角标
+print("html name:",os.listdir())
+file_list = os.listdir(".") #获取当前目录文件名，存放于file_list
+print("file_list_length",file_list.__len__())
+for i in range(0,file_list.__len__()):
+    #print(i,file_list[i])
+    f = open(file_list[i],'a',encoding='utf-8') #打开对应的文件
+    f.write(FOOTER_CONTENT)
+    f.write("</body></html>")
+    f.close()

@@ -13,3 +13,5 @@
 - 1、按照书名导出一个个独立的网页文件，文件内容包含每本书的所有的书签内容
 
 ![V1.0](https://github.com/cyang812/kindleNote/raw/master/V1.0.png)
+
+![V1.1](https://github.com/cyang812/kindleNote/raw/master/V1.1.png)
