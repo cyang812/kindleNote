@@ -2,6 +2,7 @@
 import re
 import os,os.path
 import shutil
+import random
 import string
 
 BOUNDARY = u"==========\n" #分隔符
@@ -16,6 +17,20 @@ HTML_HEAD ='''<!DOCTYPE html>
 <script src="../style/semantic.js"></script>
 <head>
     <title>kindle note</title>
+    <style>
+        .bannerbox {
+            width:100%;
+            position:relative;
+            overflow:hidden;
+            height:900px;
+        }
+        .banner {
+            width:3000px; /*图片宽度*/
+            position:absolute;
+            left:50%;
+            margin-left:-1500px; /*图片宽度的一半*/
+        }
+    </style>
 </head>
 '''
 
@@ -33,12 +48,12 @@ HEAD_ELSE = '''
         </div>
     </div>
 
-    <div class="ui  vertical basic segment">               
+    <!--<div class="ui  vertical basic segment">-->               
 '''
 
 END_ELSE = '''
             
-        </div>
+        <!--</div>-->
     </body>   
 '''
 
@@ -76,6 +91,14 @@ BOOK_NAME = '''
 '''
 
 ABOUT_PAGE = '''
+<div class="bannerbox">
+    <div class="banner">
+        <img src="images/PIC_NAME.jpg">
+    </div>
+</div>
+
+<div class="ui divider"></div>
+    <h1 class="ui center teal aligned header">书籍列表</h1>
 
 '''
 
@@ -245,7 +268,8 @@ f=open("index.html",'w',encoding='utf-8') #打开对应的文件
 f.write(HTML_HEAD.replace("../",""))      #写入html头内容
 f.write(HEAD_ELSE.replace("../index.html","#"))
 #f.write(CYANG_KINDLE)
-f.write(BOOK_NAME.replace('BookName',"asdzxcasd"))  #介绍页
+#f.write(BOOK_NAME.replace('BookName',"asdzxcasd"))  #介绍页
+f.write(ABOUT_PAGE.replace("PIC_NAME",random.randint(1,2).__str__()))
 f.write(GRID_BEGIN)
 
 for i in range(0,html_count):
