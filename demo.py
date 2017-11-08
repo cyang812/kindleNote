@@ -19,6 +19,42 @@ HTML_HEAD ='''<!DOCTYPE html>
 </head>
 '''
 
+HEAD_ELSE = '''
+<body>
+    <div class="ui fixed inverted menu">
+        <a href="../index.html" class="item">Home</a>
+        <a href="#" class="item">About</a>
+        <a href="http://cyang.tech" target="_blank" class="item">blog</a>
+    </div>
+
+    <div class="ui inverted vertical  segment">
+        <div class="ui image">
+            <!--<img src="images/banner.jpg" alt="" />--> 
+        </div>
+    </div>
+
+    <div class="ui  vertical basic segment">               
+'''
+
+END_ELSE = '''
+            
+        </div>
+    </body>   
+'''
+
+FOOTER_CONTENT = '''
+<footer>
+  <div class="ui center aligned inverted segment">                 
+      <div class="ui huge labels">
+        <div class="ui label"><i class="user icon"></i>cyang</div>
+        <div class="ui label"><i class="marker icon"></i>kindle note</div>
+        <div class="ui label"><i class="mail icon"></i>cy950812@gmail.com</div>
+        <div class="ui label"><i class="linkify icon"></i>cyang.tech</div>
+      </div>
+  </div>
+</footer>
+'''
+
 CYANG_KINDLE = '''
 <div class="ui cards">
   <div class="card">
@@ -39,31 +75,36 @@ BOOK_NAME = '''
 </div>
 '''
 
-FOOTER_CONTENT = '''
-<footer>
-  <div class="ui list">
-  <div class="item">
-    <i class="users icon"></i>
-    <div class="content">cyang</div>
-  </div>
-  <div class="item">
-    <i class="marker icon"></i>
-    <div class="content">kindle note</div>
-  </div>
-  <div class="item">
-    <i class="mail icon"></i>
-    <div class="content">
-      <a href="mailto:cy950812@gmail.com">cy950812@gmail.com</a>
+ABOUT_PAGE = '''
+
+'''
+
+GRID_BEGIN = '''
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui left image">
+                <img src="images/devices2.png" alt="" />
+            </div>
+        </div>
+
+        <div class="twelve wide column">
+            <div class="ui relaxed divided list">
+'''
+
+GRID_END = '''
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="item">
-    <i class="linkify icon"></i>
+'''
+
+ITEM_CONTENT = '''
+<div class="item">
+    <i class="large book middle aligned icon"></i>
     <div class="content">
-      <a href="http://cyang.tech">cyang.tech</a>
+      <a class="header" href="HTML_URL">HTML_FILE_NAME</a>
+      <div class="description">UPDATE_TIME</div>
     </div>
-  </div>
 </div>
-</footer>
 '''
 
 #分割函数实现利用关键词进行简单的分割成列表，结果为每一条标注
@@ -144,7 +185,9 @@ for j in range(0,nameOfBooks.__len__()):
     #f.write(CYANG_KINDLE+'\n')
     s=nameOfBooks[j]
     #f.write("<h1>"+s+"</h1>"+'\n') #写入书名
-    f.write(BOOK_NAME.replace('BookName',s))
+    #f.write("<body><div class=\"ui  vertical  segment\">")
+    f.write(HEAD_ELSE)
+    f.write(BOOK_NAME.replace('BookName',s)) #写入书名
     f.close()
 
 # 向文件添加标注内容
@@ -163,14 +206,14 @@ for j in range(0,sentence.__len__()):
             #f.write("<h2>"+s3+"</h2>")  # 写入新的标注数据
             #f.write("<h3>"+s1+"</h3>\n")
             #f.write("<h3>"+s2+"</h3>\n")
-            f.write("<div class=\"ui raised segment\">\n")
-            f.write("   <h1>"+s3+"   </h1>\n")
+            #f.write(u'========+++++++++++++++++++++========\n')
+            #f.write('''<div class="ui horizontal divider"> or </div>''') #写入分割条
+            f.write("<div class=\"ui raised container segment\">\n")
+            f.write("   <h1 class=\"ui header\">"+s3+"   </h1>\n")
             f.write('''<div class="ui horizontal divider"></div>''') #写入分割条
             f.write("<a class=\"ui tag label\">"+s2+"</a>")
             f.write("<a class=\"ui tag label\">"+s1+"</a>")
             f.write("</div>\n")
-            #f.write(u'========+++++++++++++++++++++========\n')
-            #f.write('''<div class="ui horizontal divider"> or </div>''') #写入分割条
         #print(s3)
         # try:
         #     f.write("<h3>"+s3+"</h3>") #写入新的标注数据
@@ -190,33 +233,30 @@ print("file_list_length",html_count)
 for i in range(0,file_list.__len__()):
     #print(i,file_list[i])
     f = open(file_list[i],'a',encoding='utf-8') #打开对应的文件
+    f.write(END_ELSE)
     f.write(FOOTER_CONTENT)
     f.write("</html>")
     f.close()
-
-ITEM_CONTENT = '''
-<div class="item">
-    <i class="large github middle aligned icon"></i>
-    <div class="content">
-      <a class="header" href="HTML_URL">HTML_FILE_NAME</a>
-      <div class="description">Updated 10 mins ago</div>
-    </div>
-  </div>
-'''
 
 #处理index.html
 os.chdir("../")
 print("ls dir",os.listdir())
 f=open("index.html",'w',encoding='utf-8') #打开对应的文件
-f.write(HTML_HEAD.replace("../",""))
-f.write(CYANG_KINDLE)
-f.write('''<div class="ui relaxed divided list">''')
+f.write(HTML_HEAD.replace("../",""))      #写入html头内容
+f.write(HEAD_ELSE.replace("../index.html","#"))
+#f.write(CYANG_KINDLE)
+f.write(BOOK_NAME.replace('BookName',"asdzxcasd"))  #介绍页
+f.write(GRID_BEGIN)
+
 for i in range(0,html_count):
     html_url = "books/"+file_list[i]
     html_name = file_list[i].replace(".html",'')
-    f.write(ITEM_CONTENT.replace("HTML_URL",html_url).replace("HTML_FILE_NAME",html_name))
+    f.write(ITEM_CONTENT.replace("HTML_URL",html_url)
+                        .replace("HTML_FILE_NAME",html_name)
+                        .replace("UPDATE_TIME","2017/11/8"))
 
-
+f.write(GRID_END)
+f.write(END_ELSE)
 f.write(FOOTER_CONTENT)
 f.write("</html>")
 f.close()
