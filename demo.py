@@ -17,7 +17,6 @@ HTML_HEAD ='''<!DOCTYPE html>
 <head>
     <title>kindle note</title>
 </head>
-<body>
 '''
 
 CYANG_KINDLE = '''
@@ -186,10 +185,40 @@ for j in range(0,sentence.__len__()):
 #向文件添加角标
 print("html name:",os.listdir())
 file_list = os.listdir(".") #获取当前目录文件名，存放于file_list
-print("file_list_length",file_list.__len__())
+html_count = file_list.__len__()
+print("file_list_length",html_count)
 for i in range(0,file_list.__len__()):
     #print(i,file_list[i])
     f = open(file_list[i],'a',encoding='utf-8') #打开对应的文件
     f.write(FOOTER_CONTENT)
-    f.write("</body></html>")
+    f.write("</html>")
     f.close()
+
+ITEM_CONTENT = '''
+<div class="item">
+    <i class="large github middle aligned icon"></i>
+    <div class="content">
+      <a class="header" href="HTML_URL">HTML_FILE_NAME</a>
+      <div class="description">Updated 10 mins ago</div>
+    </div>
+  </div>
+'''
+
+#处理index.html
+os.chdir("../")
+print("ls dir",os.listdir())
+f=open("index.html",'w',encoding='utf-8') #打开对应的文件
+f.write(HTML_HEAD.replace("../",""))
+f.write(CYANG_KINDLE)
+f.write('''<div class="ui relaxed divided list">''')
+for i in range(0,html_count):
+    html_url = "books/"+file_list[i]
+    html_name = file_list[i].replace(".html",'')
+    f.write(ITEM_CONTENT.replace("HTML_URL",html_url).replace("HTML_FILE_NAME",html_name))
+
+
+f.write(FOOTER_CONTENT)
+f.write("</html>")
+f.close()
+
+
