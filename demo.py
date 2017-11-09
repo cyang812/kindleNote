@@ -155,7 +155,7 @@ sentence = []
 for i in range(0,sum):
     book = clips[i].split("\n-")
     both.append(book)
-    print(book)
+    #print(book)
     if (book != ['']): # 如果书名为空
         books.append(changechar(book[0]))
         sentence.append(book[1])
@@ -226,12 +226,12 @@ print("html name:",os.listdir())
 file_list = os.listdir(".") #获取当前目录文件名，存放于file_list
 for j in range(0,sentence.__len__()):
     temp = both[j]
-    if (changechar(temp[0])+".html" in file_list ): # 检索字典
+    if (changechar(temp[0][0:80])+".html" in file_list ): # 检索字典
         #print("true")
         s1 = getAddr(temp[1])
         s2 = getTime(temp[1])
         s3 = getMark(temp[1]) #获取标注数据
-        f=open(changechar(temp[0])+".html",'a',encoding='utf-8') #打开对应的文件
+        f=open(changechar(temp[0][0:80])+".html",'a',encoding='utf-8') #打开对应的文件
         f.write(u'\n')
         if (s3 != '\n'):
             #f.write("<h2>"+s3+"</h2>")  # 写入新的标注数据
