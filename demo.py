@@ -200,12 +200,12 @@ for j in range(0,nameOfBooks.__len__()):
     #if (nameOfBooks[j]!='Who Moved My Cheese? (Spencer Johnson)'):
         #if (nameOfBooks[j]!='Send to Kindle | 当读书失去动力，你该如何重燃阅读的激情？ (kindle@eub-inc.com)'):
     '''
-    
-    # 网页文件的字符长度不超过100，以免无法在linux下创建
-    if nameOfBooks[j].__len__() > 100:
+
+    # 网页文件的字符长度不能太长，以免无法在linux下创建
+    if nameOfBooks[j].__len__() > 80:
         print(nameOfBooks[j],"_len:",nameOfBooks[j].__len__())
         print(nameOfBooks[j][0:90]+".html")
-        nameOfBooks[j] = nameOfBooks[j][0:90]  # 截取字符串
+        nameOfBooks[j] = nameOfBooks[j][0:80]  # 截取字符串
 
     f=open(nameOfBooks[j]+".html",'w',encoding='utf-8') #创建网页文件
     #f.write('<!DOCTYPE html>'
@@ -262,10 +262,9 @@ file_list = os.listdir(".") #获取当前目录文件名，存放于file_list
 html_count = file_list.__len__()
 print("file_list_length",html_count)
 for i in range(0,file_list.__len__()):
-    #print(i,file_list[i])
-
+    #print(i,file_list[i].__len__())
     if file_list[i].__len__() > 80:
-        print(file_list[i][0:10],"len:",file_list[i].__len__())
+        print(file_list[i],"len:",file_list[i].__len__())
 
     f = open(file_list[i],'a',encoding='utf-8') #打开对应的文件
     f.write(END_ELSE)
