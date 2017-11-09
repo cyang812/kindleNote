@@ -15,6 +15,7 @@ HTML_HEAD ='''<!DOCTYPE html>
 <link rel="stylesheet" href="../style/semantic.css">
 <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
 <script src="../style/semantic.js"></script>
+<script src="../style/cyang.js"></script>
 <head>
     <title>kindle note</title>
     <style>
@@ -22,13 +23,13 @@ HTML_HEAD ='''<!DOCTYPE html>
             width:100%;
             position:relative;
             overflow:hidden;
-            height:900px;
+            height:1080px;
         }
         .banner {
-            width:3000px; /*图片宽度*/
+            width:1960px; /*图片宽度*/
             position:absolute;
             left:50%;
-            margin-left:-1500px; /*图片宽度的一半*/
+            margin-left:-980px; /*图片宽度的一半*/
         }
     </style>
 </head>
@@ -93,7 +94,7 @@ BOOK_NAME = '''
 ABOUT_PAGE = '''
 <div class="bannerbox">
     <div class="banner">
-        <img src="images/PIC_NAME.jpg">
+        <img src="images/PIC_NAME.png">
     </div>
 </div>
 
@@ -106,7 +107,7 @@ GRID_BEGIN = '''
     <div class="ui grid">
         <div class="four wide column">
             <div class="ui left image">
-                <img src="images/devices2.png" alt="" />
+                <img src="images/2.png" alt="" />
             </div>
         </div>
 
@@ -269,7 +270,7 @@ f.write(HTML_HEAD.replace("../",""))      #写入html头内容
 f.write(HEAD_ELSE.replace("../index.html","#"))
 #f.write(CYANG_KINDLE)
 #f.write(BOOK_NAME.replace('BookName',"asdzxcasd"))  #介绍页
-f.write(ABOUT_PAGE.replace("PIC_NAME",random.randint(1,2).__str__()))
+f.write(ABOUT_PAGE.replace("PIC_NAME",random.randint(1,10).__str__())) #介绍页
 f.write(GRID_BEGIN)
 
 for i in range(0,html_count):

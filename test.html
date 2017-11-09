@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="style/semantic.css">
 <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
 <script src="style/semantic.js"></script>
+<script src="style/cyang.js"></script>
 <head>
 	<title>kindle note</title>
 </head>
@@ -32,6 +33,45 @@
       <h3 class="ui justified header">即使只有一行，也会占满整个宽度 </h3>
       <h3 class="ui center aligned header">居中 </h3>
     </div>
+
+    <div class="ui segment" id="example2">
+        <div class="left ui rail" style="min-height: 262.531px;">
+          <div class="ui sticky" style="width: 272px !important; height: 262.531px !important; left: -54.5px;">
+            <h3 class="ui header">Stuck Content</h3>
+            <img>
+          </div>
+        </div>
+
+        <div class="right ui rail" style="min-height: 262.531px;">
+          <p>s</p>
+          <p>s</p>
+          <p>s</p>
+          <div class="ui sticky" style="width: 272px !important; height: 262.531px !important; left: 1027.5px;">
+            <h3 class="ui header">Stuck Content</h3>
+            <img>
+          </div>
+        </div>
+            <p>z</p>
+            <p>1</p>
+            <p>x</p>
+            <p>c</p>
+            <p>a</p>
+            <p>d</p>
+            <p>s</p>
+            <p>d</p>
+            <p>q</p>
+
+          <script class="code" data-type="javascript">
+                  $('.ui.sticky')
+                  .sticky({
+                  context: '#example2',
+                  pushing: true
+                  })
+                  ;
+          </script>
+
+    </div>
+
 
 </body>
 
