@@ -2,6 +2,18 @@
 
 这是一个使用 python 语言编写的项目，用于将 kindle 笔记导出为网页文件。
 
+## 使用说明
+- 1、从 kindle 中拷贝出标注文件，重命名为 source.txt。
+- 2、下载本项目源码，使用你的 source.txt 进行替换。
+- 3、在 Python3 环境下执行 `python demo.py` 指令，等待生成网页文件。
+
+如下分别为 Linux 和 Windows 下的执行情况：
+    Debian
+    ![Debian](https://github.com/cyang812/kindleNote/raw/master/Debian.png)
+
+    Win7
+    ![Win7](https://github.com/cyang812/kindleNote/raw/master/Win7.png)
+
 ## 进度
 
 
