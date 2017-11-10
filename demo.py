@@ -10,7 +10,7 @@ intab = "\/:*?\"<>|"
 outtab = "  ： ？“《》 "     #用于替换特殊字符
 #trantab = maketrans(intab, outtab)
 
-HTML_HEAD ='''<!DOCTYPE html>
+HTML_HEAD = '''<!DOCTYPE html>
 <html><meta charset="UTF-8">
 <link rel="stylesheet" href="../style/semantic.css">
 <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
