@@ -8,9 +8,10 @@
 - 3、在 Python3 环境下执行 `python demo.py` 指令，等待生成网页文件。
 
 如下分别为 Linux 和 Windows 下的执行情况：
+
     Debian
     ![Debian](https://github.com/cyang812/kindleNote/raw/master/Debian.png)
-
+    
     Win7
     ![Win7](https://github.com/cyang812/kindleNote/raw/master/Win7.png)
 
